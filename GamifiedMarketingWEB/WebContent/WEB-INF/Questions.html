@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Questions page</title>
+</head>
+<body>
+
+
+	<h1>Questions of <a th:text="${questionnaireid}"></a></h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Question ID</th>
+				<th>Text</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="question : ${topquestions}">
+				<td th:text="${question.idquestions}"></td>
+				<td th:text="${question.text}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

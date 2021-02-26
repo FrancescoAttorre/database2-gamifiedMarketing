@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert question page</title>
+</head>
+<body>
+
+
+	<div class="formdiv">
+		<p>Complete the form to add a product of the day</p>
+		<form action="#" th:action="@{/InsertQuestion(questionnaireid=${questionnaireid})}" method="POST">
+			<fieldset>
+				<p>
+					Text: <input type="text" size="50" name="questionText"
+						required />
+				</p>
+				<input type="submit" name="Insert question" value="Insert">
+			</fieldset>
+		</form>
+	</div>
+</body>
+</html>

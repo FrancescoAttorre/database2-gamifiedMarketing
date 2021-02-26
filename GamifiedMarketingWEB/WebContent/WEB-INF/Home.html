@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Homepage</title>
+</head>
+<body>
+
+	<h1>Welcome to the GamifiedMarketing Homepage</h1>
+
+	<a th:href="@{/GoToAdminPage}">Administration page</a>
+
+	<a th:href="@{/GoToQuestionnairePage}">QuestionnairePage</a>
+	<div class="product-container" th:if="${product}" >
+		<p th:text="${'POD is '  + product.name}"></p>
+		<img th:src="*{'data:image/png;base64,'+product.getImageData()}"
+			alt="" />
+		<table>
+			<thead>
+				<tr>
+					<th>Writer</th>
+					<th>Review</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="r : ${reviews}">
+					<td th:text="${r.writer.username}"></td>
+					<td th:text="${ r.text }"></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</body>
+</html>

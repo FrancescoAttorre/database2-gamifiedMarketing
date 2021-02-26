@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Questions page</title>
+</head>
+<body>
+	<h1>Questionnaire of the day <a th:text="${qod.date}"></a></h1>
+			<form action="#" th:action="@{/CreateResponses}" method="POST">
+			<div th:each="question : ${questions}">
+			<a th:text="${question.text}"></a>
+<!-- 			<input type="text" id=question.idquestions name="response"></input> -->
+			<input type="text" th:name="${question.idquestions}"></input>
+			</div>
+			<input type="submit" value="Submit">
+			</form>
+</body>
+</html>

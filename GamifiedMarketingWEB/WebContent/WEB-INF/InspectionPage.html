@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inspection page</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>User who submitted</th>
+				<th>Answers</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="u : ${session.userSubmitted}">
+
+				<td th:text="${u.username}"></td>
+				<td><a th:href="@{/RetrieveAnswers(userid=${u.id})}">Show
+						Answers</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- IF -->
+	<div th:if="${#answers.isEmpty()}">
+		<div>Nothing to show, no answers inspected</div>
+	</div>
+	<!-- ELSE -->
+	<div th:unless="${#answers.isEmpty()}">
+		<div>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Answer</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="r : ${session.answers}">
+
+						<td th:text="${r.id}"></td>
+						<td th:text="${r.text}"></td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>

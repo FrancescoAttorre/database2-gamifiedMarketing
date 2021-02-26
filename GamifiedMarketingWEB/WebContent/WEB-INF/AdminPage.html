@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Homepage</title>
+</head>
+<body>
+
+
+	<h1>Welcome to the GamifiedMarketing Admin page</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Questionnaire ID</th>
+				<th>Date</th>
+				<th>Delete Questionnaire</th>
+				<th>Questions</th>
+				<th>Insert Question</th>
+				<th>Inspect</th>
+			</tr>
+		</thead>
+		<tbody>
+			<div class="hl-container">
+				<a
+					th:href="@{/GoToHomePage}">Go to Homepage</a>
+			</div>
+
+
+			<tr th:each="q : ${topquestionnaires}">
+				<td th:text="${q.idquestionnaires}"></td>
+				<td th:text="${q.date}"></td>
+				<td><a
+					th:href="@{/DeleteQuestionnaire(questionnaireid=${q.idquestionnaires})}">Delete</a></td>
+				<td><a
+					th:href="@{/Questions(questionnaireid=${q.idquestionnaires})}">Show
+						Questions</a></td>
+				<td><a
+					th:href="@{/InsertQuestion(questionnaireid=${q.idquestionnaires})}">Insert
+						Question</a></td>
+				<td><a
+					th:href="@{/InspectQuestionnaire(questionnaireid=${q.idquestionnaires})}">Inspect
+						Questionnaire</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<div class="formdiv">
+		<p>Complete the form to add a product of the day</p>
+		<form action="#" th:action="@{/InsertProductOfTheDay}" method="POST">
+			<fieldset>
+				<p>
+					Date: <input type="date" name="date" placeholder="yyyy/mm/dd"
+						required />
+				</p>
+
+				<p>
+					<label for="products">Choose a product:</label> <select
+						name="productId" id="productId">
+						<option th:each="p : ${products}" th:value="${p.idproducts}"
+							th:text="${p.name}"></option>
+					</select>
+				</p>
+
+				<input type="submit" name="Insert product of the day" value="Insert">
+			</fieldset>
+		</form>
+	</div>
+
+
+</body>
+</html>
