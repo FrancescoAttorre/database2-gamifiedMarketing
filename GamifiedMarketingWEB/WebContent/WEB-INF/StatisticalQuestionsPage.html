@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Questions page</title>
+</head>
+<body>
+
+	<form action="#" th:action="@{/SubmitResponses}" method="POST">
+		<p>Please select your gender:</p>
+		<input type="radio" id="male" name="gender" value="m"> <label
+			for="male">Male</label><br> <input type="radio" id="female"
+			name="gender" value="f"> <label for="female">Female</label><br>
+
+		<p>Please select your expertise:</p>
+		<input type="radio" id="low" name="expertise" value="l"> <label
+			for="low">low</label><br> <input type="radio" id="medium"
+			name="expertise" value="m"> <label for="medium">medium</label><br>
+		<input type="radio" id="high" name="expertise" value="h"> <label
+			for="high">high</label><br> <br> <input type="number"
+			id="age" name="age" min="1" max="125"></input> <input type="submit"
+			value="Submit">
+
+	</form>
+	<form action="#" th:action="@{/CancelSubmission}" method="POST">
+		<input type="submit" value="Cancel">
+	</form>
+	<form action="#" th:action="@{/GoToQuestionnairePage}" method="GET">
+		<input type="submit" value="Previous">
+	</form>
+	
+
+</body>
+</html>

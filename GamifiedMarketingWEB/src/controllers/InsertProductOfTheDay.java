@@ -31,38 +31,41 @@ import services.QuestionnaireService;
 public class InsertProductOfTheDay extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
-	
-	@EJB(name="services/QuestionnaireService")
+
+	@EJB(name = "services/QuestionnaireService")
 	private QuestionnaireService qstService;
-	
-    public InsertProductOfTheDay() {
-        super();
-    }
-    /*
-    public void init() throws ServletException {
-		ServletContext servletContext = getServletContext();
-		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
-		templateResolver.setTemplateMode(TemplateMode.HTML);
-		this.templateEngine = new TemplateEngine();
-		this.templateEngine.setTemplateResolver(templateResolver);
-		templateResolver.setSuffix(".html");
+
+	public InsertProductOfTheDay() {
+		super();
 	}
-    */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	/*
+	 * public void init() throws ServletException { ServletContext servletContext =
+	 * getServletContext(); ServletContextTemplateResolver templateResolver = new
+	 * ServletContextTemplateResolver(servletContext);
+	 * templateResolver.setTemplateMode(TemplateMode.HTML); this.templateEngine =
+	 * new TemplateEngine();
+	 * this.templateEngine.setTemplateResolver(templateResolver);
+	 * templateResolver.setSuffix(".html"); }
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		LocalDate date = null;
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		date = LocalDate.parse(request.getParameter("date").toString(), formatter);
-        
+
 		int productid = Integer.parseInt(request.getParameter("productId"));
+
+		Integer questionnaireId = qstService.createQuestionnaire(productid, LocalDateTime.of(date, LocalTime.now()));
 		
-		int questionnaireId = qstService.createQuestionnaire(productid,LocalDateTime.of(date,LocalTime.now()));
+		//TODO: complete with errors
+		//if(questionnaireId == null) //cannot insert
 		
 		String ctxpath = getServletContext().getContextPath();
 		String path = ctxpath + "/GoToAdminPage";
 		response.sendRedirect(path);
-		
+
 	}
-	
+
 }
-	

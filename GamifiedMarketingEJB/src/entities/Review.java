@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "reviews", schema = "db_gamified_marketing")
 @NamedQueries({ @NamedQuery(name = "Review.findAll", query = "SELECT r FROM Review r"),
-				@NamedQuery(name = "Review.findByProductID", query = "Select r FROM Review r WHERE r.product_reviewed.id = :productid"),
+				@NamedQuery(name = "Review.findByProductID", query = "Select r FROM Review r WHERE r.product_reviewed.id = :productId"),
 			})
 
 public class Review implements Serializable {

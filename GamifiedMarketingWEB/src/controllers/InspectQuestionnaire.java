@@ -24,6 +24,7 @@ import entities.State;
 import entities.User;
 import services.QuestionService;
 import services.QuestionnaireService;
+import services.ResponseService;
 import services.StateService;
 
 @WebServlet("/InspectQuestionnaire")
@@ -37,6 +38,9 @@ public class InspectQuestionnaire extends HttpServlet {
 	@EJB(name="services/StateService")
 	private StateService stateService;
 	
+	@EJB(name="services/ResponseService")
+	private ResponseService responseService;
+	
 	public void init() throws ServletException {
 		ServletContext servletContext = getServletContext();
 		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
@@ -48,7 +52,10 @@ public class InspectQuestionnaire extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<State> states = stateService.findAllStates();
+		int questionnaireId = Integer.parseInt(req.getParameter("questionnaireid"));
+		
+		
+		List<State> states = stateService.findStatesOfQuestionnaire(questionnaireId);
 		List<User> submitted = new ArrayList<User>();
 		List<User> cancelled = new ArrayList<User>();
 		
@@ -59,17 +66,18 @@ public class InspectQuestionnaire extends HttpServlet {
 				cancelled.add(s.getUser());
 		}
 		
-		int questionnaireId = Integer.parseInt(req.getParameter("questionnaireid"));
 		
 		String path = "WEB-INF/InspectionPage.html";
 		
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
 		
-		HttpSession session = req.getSession();
-		System.out.println(session.getCreationTime());
-		ctx.setVariable("answers", null);
-		ctx.setVariable("questionnaireId", questionnaireId);
+		if(req.getParameter("userid") == null)
+			ctx.setVariable("answers", null);
+		else {
+			ctx.setVariable("answers", responseService.retrieveResponsesOfQuestionnaire(Integer.parseInt(req.getParameter("userid")), questionnaireId));
+		}
+		ctx.setVariable("questionnaireid", questionnaireId);
 		ctx.setVariable("userSubmitted", submitted);
 		ctx.setVariable("userCancelled", cancelled);
 		

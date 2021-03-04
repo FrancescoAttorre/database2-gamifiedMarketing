@@ -16,27 +16,33 @@ public class DeleteQuestionnaire extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB(name = "services/QuestionnaireService")
 	private QuestionnaireService qService;
-	
+
 	public DeleteQuestionnaire() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		super.init();
 	}
 
-	//TODO : fix delete questionnaire action
+	// TODO : fix delete questionnaire action
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int qid;
 		qid = Integer.parseInt(request.getParameter("questionnaireid"));
-		qService.deleteQuestionnaire(qid);
-		String ctxpath = getServletContext().getContextPath();
-		String path = ctxpath + "/GoToAdminPage";
-		response.sendRedirect(path);
+		boolean ret = qService.deleteQuestionnaire(qid);
+		if (ret == true) {
+			String ctxpath = getServletContext().getContextPath();
+			String path = ctxpath + "/GoToAdminPage";
+			response.sendRedirect(path);
+		}else {
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Cannot remove questionnaire of the day");
+			return;
+		}
 	}
 
 	@Override
@@ -44,7 +50,7 @@ public class DeleteQuestionnaire extends HttpServlet {
 		// TODO Auto-generated method stub
 		super.doPost(req, resp);
 	}
-	
+
 	public void destroy() {
 	}
 }

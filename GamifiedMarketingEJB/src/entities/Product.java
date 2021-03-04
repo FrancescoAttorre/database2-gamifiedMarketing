@@ -30,23 +30,12 @@ public class Product implements Serializable {
 	@Lob
 	private byte[] image;
 	
-	@OneToMany(mappedBy="product_reviewed")
-	private List<Review> reviews;
-	
 	public Product(int idproducts, String name) {
 		super();
 	}
 	
 	public Product() {}
 	
-	public List<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
-
 	public int getIdproducts() {
 		return id;
 	}

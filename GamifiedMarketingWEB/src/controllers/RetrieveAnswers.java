@@ -62,7 +62,7 @@ public class RetrieveAnswers extends HttpServlet {
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
 		
-		session.setAttribute("answers", responses);
+		//session.setAttribute("answers", responses);
 		//ctx.setVariable("questionnaireId", questionnaireId);
 		
 		ctx.setVariable("answers", responses);

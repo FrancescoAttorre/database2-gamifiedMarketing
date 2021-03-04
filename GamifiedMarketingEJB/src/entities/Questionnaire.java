@@ -12,9 +12,8 @@ import java.util.List;
 @Entity
 @Table(name = "questionnaires", schema = "db_gamified_marketing")
 @NamedQueries({
-	@NamedQuery(name = "Questionnaire.findByDate", query = "SELECT q FROM Questionnaire q WHERE q.date= :d "),
+	@NamedQuery(name = "Questionnaire.findByDate", query = "SELECT q FROM Questionnaire q WHERE q.date= :date "),
 	@NamedQuery(name = "Questionnaire.findAll", query = "SELECT q FROM Questionnaire q "),
-	@NamedQuery(name = "Questionnaire.findQOD", query = "SELECT q FROM Questionnaire q WHERE q.date= :qsdate")
 })
 public class Questionnaire implements Serializable{
 	
@@ -28,7 +27,7 @@ public class Questionnaire implements Serializable{
 	@JoinColumn(name = "product_of_the_day")
 	private Product product_of_the_day;
 	
-	@OneToMany(mappedBy="questionnaire")
+	@OneToMany(mappedBy="questionnaire", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Question> questions;
 	
 	@Temporal(TemporalType.DATE)
@@ -65,7 +64,7 @@ public class Questionnaire implements Serializable{
 		this.product_of_the_day = product_of_the_day;
 	}
 
-	public void setIdquestionnaires(int idquestionnaires) {
+	public void setId(int idquestionnaires) {
 		this.id = idquestionnaires;
 	}
 
@@ -74,7 +73,7 @@ public class Questionnaire implements Serializable{
 		this.date = Date.from(instant);	
 	}
 
-	public int getIdquestionnaires() {
+	public int getId() {
 		return id;
 	}
 

@@ -30,6 +30,8 @@ public class User implements Serializable {
 
 	private String username;
 	
+	private boolean isAdmin;
+	
 	public User() {
 	}
 
@@ -73,4 +75,13 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
+	
 }

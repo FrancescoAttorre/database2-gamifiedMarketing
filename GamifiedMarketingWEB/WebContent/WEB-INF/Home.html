@@ -11,10 +11,16 @@
 	<a th:href="@{/GoToAdminPage}">Administration page</a>
 
 	<a th:href="@{/GoToQuestionnairePage}">QuestionnairePage</a>
-	<div class="product-container" th:if="${product}" >
+
+	<a th:href="@{/RetrieveLeaderboard}">LeaderboardPage</a>
+
+	<div class="product-container" th:if="${product}">
 		<p th:text="${'POD is '  + product.name}"></p>
 		<img th:src="*{'data:image/png;base64,'+product.getImageData()}"
 			alt="" />
+	</div>
+
+	<div class="reviews-container" th:if="${not #lists.isEmpty(reviews)}">
 		<table>
 			<thead>
 				<tr>
@@ -25,9 +31,10 @@
 			<tbody>
 				<tr th:each="r : ${reviews}">
 					<td th:text="${r.writer.username}"></td>
-					<td th:text="${ r.text }"></td>
+					<td th:text="${r.text }"></td>
 				</tr>
 			</tbody>
+
 		</table>
 
 	</div>

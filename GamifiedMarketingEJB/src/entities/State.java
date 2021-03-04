@@ -14,8 +14,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "state", schema = "db_gamified_marketing")
 @NamedQueries({
-	@NamedQuery(name = "State.findAll", query = "SELECT s FROM State s") }
-)
+	@NamedQuery(name = "State.findAll", query = "SELECT s FROM State s"),
+	@NamedQuery(name = "State.findByQuestionnaire", query = "SELECT s FROM State s WHERE s.questionnaire.id = :questionnaireId"),
+	@NamedQuery(name = "State.findByQuestionnaireAndUser", query = "SELECT s FROM State s WHERE s.questionnaire.id = :questionnaireId AND s.user.id = :userId")
+})
 public class State {
 	@Id
 	private int id;

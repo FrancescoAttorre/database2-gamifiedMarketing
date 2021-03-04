@@ -5,11 +5,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "responses", schema = "db_gamified_marketing")
-//@NamedQuery(name = "Response.findResponseOfQuestions", query = "SELECT r FROM Response r WHERE r.question IN :questions")
 @NamedQueries({
-	@NamedQuery(name = "Response", query = "SELECT q FROM Questionnaire q"),
-	@NamedQuery(name = "Response.findAllForUser", query = "Select r FROM Response r WHERE r.writer = :user")
-	
+	@NamedQuery(name = "Response.findAllForUser", query = "Select r FROM Response r WHERE r.writer.id = :user"),
+	@NamedQuery(
+			name = "Response.findByQuestionnaire", 
+			query = "SELECT r FROM Response r JOIN r.question q WHERE q.questionnaire.id = :questionnaireId")
 })
 public class Response implements Serializable {
 
@@ -36,11 +36,11 @@ public class Response implements Serializable {
 		this.response=response;
 		
 	}
-	public int getIdresponses() {
+	public int getId() {
 		return id;
 	}
 
-	public void setIdresponses(int idresponses) {
+	public void setId(int idresponses) {
 		this.id = idresponses;
 	}
 
@@ -60,7 +60,7 @@ public class Response implements Serializable {
 		this.question = question;
 	}
 
-	public String getReponse() {
+	public String getResponse() {
 		return response;
 	}
 

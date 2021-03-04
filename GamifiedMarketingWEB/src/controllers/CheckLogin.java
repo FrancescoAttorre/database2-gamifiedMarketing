@@ -16,6 +16,7 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import services.AccessService;
 import services.UserService;
 import entities.User;
 import exceptions.CredentialsException;
@@ -27,7 +28,9 @@ public class CheckLogin extends HttpServlet {
 	private TemplateEngine templateEngine;
 	@EJB(name = "services/UserService")
 	private UserService usrService;
-
+	@EJB(name = "services/AccessService")
+	private AccessService accService;
+	
 	public CheckLogin() {
 		super();
 	}
@@ -70,8 +73,6 @@ public class CheckLogin extends HttpServlet {
 		User user;
 		try {
 			// query db to authenticate for user
-			System.out.println("Login Get requests are correctly received: "+usrn+" "+pwd);
-			System.out.println(usrService);
 			user = usrService.checkCredentials(usrn, pwd);
 		} catch (CredentialsException | NonUniqueResultException e) {
 			e.printStackTrace();
@@ -90,6 +91,8 @@ public class CheckLogin extends HttpServlet {
 			path = "/index.html";
 			templateEngine.process(path, ctx, response.getWriter());
 		} else {
+			accService.insertNewAccess(user.getId());
+			
 			request.getSession().setAttribute("user", user);
 			path = getServletContext().getContextPath() + "/GoToHomePage";
 			System.out.println(path);

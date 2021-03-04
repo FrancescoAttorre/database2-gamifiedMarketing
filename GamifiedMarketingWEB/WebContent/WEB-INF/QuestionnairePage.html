@@ -10,9 +10,9 @@
 			<div th:each="question : ${questions}">
 			<a th:text="${question.text}"></a>
 <!-- 			<input type="text" id=question.idquestions name="response"></input> -->
-			<input type="text" th:name="${question.idquestions}"></input>
+			<input type="text" th:name="${question.idquestions}" required></input>
 			</div>
-			<input type="submit" value="Submit">
+			<input type="submit" value="Continue">
 			</form>
 </body>
 </html>

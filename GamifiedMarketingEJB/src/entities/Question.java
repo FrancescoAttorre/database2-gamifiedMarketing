@@ -39,7 +39,7 @@ public class Question implements Serializable{
 	}
 
 	public int getQuestionnaire() {
-		return questionnaire.getIdquestionnaires();
+		return questionnaire.getId();
 	}
 
 	public void setQuestionnaire(Questionnaire questionnaire) {

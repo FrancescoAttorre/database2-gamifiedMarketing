@@ -20,17 +20,9 @@ public class ReviewService {
 	public ReviewService(EntityManager em) {
         this.em = em;
     }
-	
-	public List<Review> findByProductID(int productID){
-		return em.createNamedQuery("Review.findByProductID",Review.class).setParameter("productid",productID).getResultList();
-	}
 
-	public List<Object[]> findByProductID2(int productID){
-		return em.createNamedQuery("Review.findByProductID2",Object[].class).setParameter("productid",productID).getResultList();
+	public List<Review> findForProduct(int productId){
+		return em.createNamedQuery("Review.findByProductID",Review.class).setParameter("productId", productId).getResultList();
 	}
-
-	/*public List<User> prova(int productID){
-		return em.createNamedQuery("Review.writersUsername",User.class).getResultList();
-	}*/
 	
 }

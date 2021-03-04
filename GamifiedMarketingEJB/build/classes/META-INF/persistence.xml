@@ -9,5 +9,7 @@
 		<class>entities.Review</class>
 		<class>entities.Response</class>
 		<class>entities.State</class>
+		<class>entities.OptionalResponse</class>
+		<class>entities.Access</class>
 	</persistence-unit>
 </persistence>

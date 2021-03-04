@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+				<th>User who submitted</th>
+				<th>Points</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="l : ${leaderboard}">
+
+				<td th:text="${l.user.username}"></td>
+				<td th:text="${l.points}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+</body>
+</html>

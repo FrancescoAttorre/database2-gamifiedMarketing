@@ -44,4 +44,8 @@ public class UserService {
                         throw new UpdateProfileException("Could not change profile");
                 }
         }
+        
+        public User getUser(int userId) {
+        	return em.find(User.class, userId);
+        }
 }

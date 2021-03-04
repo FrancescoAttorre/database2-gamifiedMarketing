@@ -28,18 +28,18 @@
 
 
 			<tr th:each="q : ${topquestionnaires}">
-				<td th:text="${q.idquestionnaires}"></td>
+				<td th:text="${q.id}"></td>
 				<td th:text="${q.date}"></td>
 				<td><a
-					th:href="@{/DeleteQuestionnaire(questionnaireid=${q.idquestionnaires})}">Delete</a></td>
+					th:href="@{/DeleteQuestionnaire(questionnaireid=${q.id})}">Delete</a></td>
 				<td><a
-					th:href="@{/Questions(questionnaireid=${q.idquestionnaires})}">Show
+					th:href="@{/Questions(questionnaireid=${q.id})}">Show
 						Questions</a></td>
 				<td><a
-					th:href="@{/InsertQuestion(questionnaireid=${q.idquestionnaires})}">Insert
+					th:href="@{/InsertQuestion(questionnaireid=${q.id})}">Insert
 						Question</a></td>
 				<td><a
-					th:href="@{/InspectQuestionnaire(questionnaireid=${q.idquestionnaires})}">Inspect
+					th:href="@{/InspectQuestionnaire(questionnaireid=${q.id})}">Inspect
 						Questionnaire</a></td>
 			</tr>
 		</tbody>

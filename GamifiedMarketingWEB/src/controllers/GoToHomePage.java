@@ -35,6 +35,7 @@ public class GoToHomePage extends HttpServlet {
 	@EJB(name="services/QuestionnaireService")
 	private QuestionnaireService qstService;
 	
+	
     public GoToHomePage() {
         super();
     }
@@ -71,8 +72,8 @@ public class GoToHomePage extends HttpServlet {
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		if(productOfTheDay != null) {
-		ctx.setVariable("product", productOfTheDay);
-		ctx.setVariable("reviews", productOfTheDay.getReviews());
+			ctx.setVariable("product", productOfTheDay);
+			ctx.setVariable("reviews", rService.findForProduct(productOfTheDay.getIdproducts()));
 		}
 		
 		templateEngine.process(path, ctx, response.getWriter());
@@ -86,5 +87,7 @@ public class GoToHomePage extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	public void destroy() {}
 
 }
